@@ -15,7 +15,6 @@ public abstract class NtChannel {
     protected List<ListenerEvent> list = new ArrayList<>();
 
     public void addObserver(ListenerEvent listenerEvent) {
-        System.out.println("新建监听者加入到channel");
         list.add(listenerEvent);
     }
 

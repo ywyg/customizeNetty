@@ -6,7 +6,6 @@ import start.NtEvent;
 
 import java.io.IOException;
 import java.nio.channels.SocketChannel;
-import java.nio.channels.spi.SelectorProvider;
 
 /**
  * @author saijie.gao
@@ -21,11 +20,8 @@ public class NtFuture implements ListenerEvent {
 
     @Override
     public void listener(ListenerTypeEnum listenerTypeEnum) {
-        System.out.println(listenerTypeEnum.toString() + "事件发生了");
         if (ListenerTypeEnum.CONNECTED == listenerTypeEnum) {
-            System.out.println("CONNECTED事件将要执行");
             connectEvent.event();
-            System.out.println("CONNECTED事件执行完成");
         }
         if (ListenerTypeEnum.DISCONNECTED == listenerTypeEnum) {
             disconnectEvent.event();
@@ -43,7 +39,6 @@ public class NtFuture implements ListenerEvent {
 
     // 该方法需要被唤醒，当连接事件发生
     public void connectListener(NtEvent ntEvent) {
-        System.out.println("连接事件被注册到监听器");
         connectEvent = ntEvent;
     }
 

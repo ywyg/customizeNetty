@@ -19,7 +19,7 @@ import threadPool.EventLoopGroup;
 public class ServerBootStrap {
 
     private TaskConfig taskConfig = new TaskConfig();
-    Task task;
+    private Task task;
     /**
      * 设置执行任务的线程池
      *
@@ -68,8 +68,8 @@ public class ServerBootStrap {
      * @param port
      * @return
      */
-    public ServerBootStrap start(int port) {
-        task = new Task(port,taskConfig);
+    public ServerBootStrap bind(int port) {
+        task = new Task(port, taskConfig);
         return this;
     }
 

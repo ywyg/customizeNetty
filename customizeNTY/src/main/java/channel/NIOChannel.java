@@ -7,7 +7,10 @@ import handle.NtHandler;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.*;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -65,7 +68,6 @@ public class NIOChannel extends NtChannel {
                             SocketChannel socket = channel.accept();
                             socket.configureBlocking(false);
                             socket.register(selector, SelectionKey.OP_READ);
-                            System.out.println("接收到新的客户端连接");
                             notifyListener(ListenerTypeEnum.CONNECTED);
                             iterator.remove();
                         }
@@ -99,7 +101,6 @@ public class NIOChannel extends NtChannel {
                                 byte[] bytes = new byte[byteBuffer.remaining()];
                                 byteBuffer.get(bytes);
                                 String body = new String(bytes, "UTF-8");
-                                System.out.println("接收到新的消息");
                                 NtContext ntContext = new NtContext(channel);
                                 ntHandler.read(ntContext, body);
                             }
@@ -114,10 +115,5 @@ public class NIOChannel extends NtChannel {
             }
         };
 
-    }
-
-    public static void main(String[] args) {
-        NIOChannel channel = new NIOChannel();
-        while (true){}
     }
 }
